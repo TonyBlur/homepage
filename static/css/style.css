@@ -1,21 +1,18 @@
 @font-face {
     font-family: "a";
-    /*中文字体*/
-    src: url(../fonts/OPPOSans.ttf);
+    src: url(../fonts/OPPOSans-Regular.ttf);
     font-display: swap;
 }
 
-
 @font-face {
     font-family: "b";
-
-    src: url(../fonts/Ubuntu-Regular.ttf);
+    src: url(../fonts/OPPOSans-Regular.ttf);
     font-display: swap;
 }
 
 @font-face {
     font-family: "title";
-    /*英文字体*/
+    /*标题英文字体*/
     src: url(../fonts/Pacifico-Regular.ttf);
     font-display: swap;
 }
@@ -61,7 +58,7 @@ a:focus {
 html[data-theme="Dark"] {
     
     --main_text_color: #fff;
-    --gradient:linear-gradient(120deg, rgb(133, 62, 255), #f76cc6 30%, rgb(255, 255, 255) 60%);
+    --gradient:linear-gradient(120deg, #853eff, #f76cc6 30%, #3957b2 60%);
     --purple_text_color: #747bff;
     --text_bg_color: rgb(26, 4, 48);
     --item_bg_color: rgb(19, 20, 24);
@@ -98,7 +95,8 @@ body {
 }
 
 #tblu-loading {
-    background: radial-gradient(white, #d8eaff);
+    background: #00000042;
+    backdrop-filter: blur(20px);
     background-size: 100%;
     background-position: center;
 
@@ -113,6 +111,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition: 1s ease-out;
 }
 
 
@@ -122,9 +122,9 @@ body {
     width: 150px;
     position: relative;
     border-radius: 50%;
-    background: #472eff;
+    background: #808080;
 
-    animation: zoom 1s linear infinite;
+    animation: zoom 1.7s linear infinite;
 }
 
 @keyframes zoom {
@@ -514,7 +514,6 @@ body {
     -webkit-backdrop-filter: blur(var(--card_filter));-webkit-backdrop-filter: blur(var(--card_filter));
     transition: opacity 0.3s ease, background-color 0.3s ease, border 0.3s ease, transform 0.2s ease;
 
-
 }
 
 .projectItem {
@@ -548,10 +547,6 @@ body {
 
 .projectItem:hover .projectItemRight {
     width: 0%;
-}
-
-.projectItem:hover .projectItemRight img {
-    transform: rotate(40deg);
 }
 
 .projectItem:hover h1 {
@@ -653,7 +648,7 @@ footer {
         display: none;
     }
 
-    .a .projectItemRight {
+    /* .a .projectItemRight {
         display: none;
 
     }
@@ -665,7 +660,7 @@ footer {
 
     .a .projectItemLeft {
         width: 100%;
-    }
+    } */
 
     .a {
 
