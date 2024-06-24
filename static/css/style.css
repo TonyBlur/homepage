@@ -1,7 +1,7 @@
 @font-face {
     font-family: "a";
     /*中文字体*/
-    src: url();
+    src: url(../fonts/OPPOSans.ttf);
     font-display: swap;
 }
 
@@ -97,7 +97,7 @@ body {
 
 }
 
-#zyyo-loading {
+#tblu-loading {
     background: radial-gradient(white, #d8eaff);
     background-size: 100%;
     background-position: center;
@@ -117,7 +117,7 @@ body {
 
 
 
-#zyyo-loading-center {
+#tblu-loading-center {
     height: 150px;
     width: 150px;
     position: relative;
@@ -146,7 +146,7 @@ body {
 
 
 
-.zyyo-filter {
+.tblu-filter {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -156,7 +156,7 @@ body {
     z-index: -99999999;
    
 }
-.zyyo-main1 {
+.tblu-main1 {
     z-index: 999;
     width: 100vw;
     display: flex;
@@ -169,7 +169,7 @@ body {
     background-attachment: fixed;
     height: 100vh;
 }
-.zyyo-main {
+.tblu-main {
     width: 100%;
     margin: 0 auto;
     transition: transform 0.5s ease;
@@ -180,7 +180,7 @@ body {
 }
 
 
-.zyyo-left {
+.tblu-left {
     overflow-y: scroll;
     width: 230px;
     height: 100vh;
@@ -194,7 +194,7 @@ body {
 }
 
 
-.zyyo-left::-webkit-scrollbar {
+.tblu-left::-webkit-scrollbar {
     display: none;
 }
 
@@ -306,7 +306,7 @@ body {
 
 
 
-.zyyo-right {
+.tblu-right {
     width: calc(100% - 230px);
     display: flex;
     padding: 20px;
@@ -649,7 +649,7 @@ footer {
 }
 
 @media (max-width: 800px) {
-    .zyyo-left {
+    .tblu-left {
         display: none;
     }
 
@@ -682,7 +682,7 @@ footer {
 
 
 
-    .zyyo-right {
+    .tblu-right {
         width: 100%;
     }
 
