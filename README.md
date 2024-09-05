@@ -1,5 +1,7 @@
 <div align="center"><a name="readme-top"></a>
 
+<img src="https://github.com/TonyBlur/homepage/blob/main/static/img/homepage-96.png?raw=true" width="96" height="96">
+
 # HomePage - a project forked from [homepage](https://github.com/ZYYO666/homepage)
 
 一个我的个人主页
