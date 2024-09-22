@@ -2,9 +2,11 @@
 
 <img src="https://github.com/TonyBlur/homepage/blob/main/static/img/homepage-96.png?raw=true" width="96" height="96">
 
-# HomePage - a project forked from [homepage](https://github.com/ZYYO666/homepage)
+# HomePage<br> - a project forked from [homepage](https://github.com/ZYYO666/homepage)
 
 一个我的个人主页
+
+<img src="https://github.com/TonyBlur/homepage/blob/main/static/img/homepage_preview.png?raw=true">
 
 </div>
 
@@ -13,9 +15,11 @@
 # 使用 Usage
 
 /static/root.css 主题文件
-/static/style.css 样式文件
-在此可以修改各种字体
+
+/static/style.css 样式文件  在此可以修改各种字体
+
 /static/img/favicon.ico 网页ico和主页头像
+
 /static/script.js js文件
 
 # 特色 Features
