@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1728119286510" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8192" data-darkreader-inline-fill="" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+    <path
+        d="M512 28.1C244.7 28.1 28.1 244.7 28.1 512S244.7 995.9 512 995.9c267.3 0 483.9-216.7 483.9-483.9S779.3 28.1 512 28.1z m0 939.8C260.2 967.9 56.1 763.8 56.1 512S260.2 56.1 512 56.1 967.9 260.2 967.9 512 763.8 967.9 512 967.9z"
+        fill="#00000000" p-id="8193" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #181a1b;"></path>
+    <path 
+        d="M512 0C229.2 0 0 229.2 0 512s229.2 512 512 512 512-229.2 512-512S794.8 0 512 0z m0 995.9C244.7 995.9 28.1 779.3 28.1 512S244.7 28.1 512 28.1c267.3 0 483.9 216.7 483.9 483.9S779.3 995.9 512 995.9z"
+        fill="#95cfb8" p-id="8194" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #491400;"></path>
+    <path
+        d="M512 56.1C260.2 56.1 56.1 260.2 56.1 512S260.2 967.9 512 967.9 967.9 763.8 967.9 512 763.8 56.1 512 56.1z m0 869.7C283.5 925.8 98.2 740.5 98.2 512S283.5 98.2 512 98.2 925.8 283.5 925.8 512 740.5 925.8 512 925.8z"
+        fill="#7CB9E8" p-id="8195" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #bb3e11;"></path>
+</svg>
