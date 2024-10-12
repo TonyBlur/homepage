@@ -206,6 +206,7 @@ body {
     position: relative;
     aspect-ratio: 1/1;
     margin-top: 50px;
+    margin-bottom: 20px;
     background-size: cover;
     border-radius: 50%;
 }
