@@ -4,6 +4,14 @@
  * Copyright © 2025 tblu.xyz
  */
 
+// 定义兼容老浏览器的window扩展接口
+interface WindowWithVendorAnimation extends Window {
+  webkitRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
+  mozRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
+  oRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
+  msRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
+}
+
 // 导入样式
 import './styles/style.css';
 
@@ -188,7 +196,13 @@ const createFpsCounter = (): void => {
   fpsElement.style.right = '5px';
   document.body.insertBefore(fpsElement, document.body.firstChild);
 
-  const requestAnimationFrame = window.requestAnimationFrame ||
+  // 使用带浏览器前缀兼容的requestAnimationFrame
+  const windowWithVendor = window as WindowWithVendorAnimation;
+  const requestAnimationFrame = windowWithVendor.requestAnimationFrame ||
+    windowWithVendor.webkitRequestAnimationFrame ||
+    windowWithVendor.mozRequestAnimationFrame ||
+    windowWithVendor.oRequestAnimationFrame ||
+    windowWithVendor.msRequestAnimationFrame ||
     function (callback: FrameRequestCallback): number {
       return window.setTimeout(callback, 1000 / 60);
     };
