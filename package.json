@@ -1,11 +1,26 @@
 {
+  "name": "homepage",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Tony Blur的个人主页",
+  "author": "Tony Blur",
+  "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@types/node": "^22.13.14",
+    "@vitejs/plugin-react": "^4.3.4",
     "commitlint-config-gitmoji": "^2.3.1",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.3"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
   }
 }

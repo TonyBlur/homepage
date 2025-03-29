@@ -2,18 +2,14 @@
 <html class="tblu.xyz">
 
 <head class="tblu.xyz">
-
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>
-		tblu </title>
-	<link rel="icon" href="./static/img/favicon.ico">
+	<title>tblu</title>
+	<link rel="icon" href="./src/assets/img/favicon.ico">
 	<meta name="description" content="擅长复制粘贴, 这个网站也是fork的.....">
 	<meta name="keywords" content="tonyblu,tblu,tblu主页,tblu引导页">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="./static/css/style.css">
-	<link rel="stylesheet" href="./static/css/root.css">
-
+	<!-- 样式文件现在由Vite通过TypeScript入口文件导入 -->
 </head>
 
 <body>
@@ -27,9 +23,9 @@
 	</div> -->
 	<div class="tblu-main">
 		<div class="tblu-left">
-			<div class="logo" style="background-image: url(./static/img/logo.png);">
+			<div class="logo" style="background-image: url(./src/assets/img/logo.png);">
 				<img style="position: absolute; top:-10%; left:-10%; width: 120%; aspect-ratio: 1/1;"
-					src="./static/svg/logo-outer-ring.svg">
+					src="./src/assets/svg/logo-outer-ring.svg">
 			</div>
 			<div class="left-div left-des">
 				<div class="left-des-item"><svg t="1705773709627" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1478"><path d="M512 249.976471c-99.388235 0-180.705882 81.317647-180.705882 180.705882s81.317647 180.705882 180.705882 180.705882 180.705882-81.317647 180.705882-180.705882-81.317647-180.705882-180.705882-180.705882z m0 301.17647c-66.258824 0-120.470588-54.211765-120.470588-120.470588s54.211765-120.470588 120.470588-120.470588 120.470588 54.211765 120.470588 120.470588-54.211765 120.470588-120.470588 120.470588z" p-id="1479"></path><path d="M512 39.152941c-216.847059 0-391.529412 174.682353-391.529412 391.529412 0 349.364706 391.529412 572.235294 391.529412 572.235294s391.529412-222.870588 391.529412-572.235294c0-216.847059-174.682353-391.529412-391.529412-391.529412z m0 891.482353C424.658824 873.411765 180.705882 686.682353 180.705882 430.682353c0-183.717647 147.576471-331.294118 331.294118-331.294118s331.294118 147.576471 331.294118 331.294118c0 256-243.952941 442.729412-331.294118 499.952941z" p-id="1480"></path></svg>
@@ -104,13 +100,12 @@
 		</div>
 		<div class="tblu-right">
 			<header>
-				<div class="index-logo" style="background-image: url(./static/img/logo.png);">
+				<div class="index-logo" style="background-image: url(./src/assets/img/logo.png);">
 					<img style="position: absolute; top:-10%; left:-10%; width: 120%; aspect-ratio: 1/1;"
-					src="./static/svg/logo-outer-ring.svg">
+					src="./src/assets/svg/logo-outer-ring.svg">
 				</div>
 				<div class="welcome">
-					Hello, I'm <span class="gradientText">
-						tonyblu </span>
+					Hello, I'm <span class="gradientText">tonyblu</span>
 				</div>
 				<div class="description">👦 <span class="purpleText">Front End</span> Developer
 				</div>
@@ -130,7 +125,7 @@
                         </svg>
 						<div class="iconTip">邮箱</div>
 					</a>
-					<a class="iconItem" onclick="pop('./static/img/wxzsm.jpg')" href="javascript:void(0)">
+					<a class="iconItem" onclick="pop('./img/wxzsm.jpg')" href="javascript:void(0)">
 						<svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4987" >
                             <path d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"  p-id="4988"></path>
                             <path d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"  p-id="4989"></path>
@@ -138,31 +133,30 @@
                         </svg>
 						<div class="iconTip">赞助</div>
 					</a>
-					<a class="iconItem" onclick="pop('./static/img/qq.jpg')" href="javascript:void(0)">
+					<a class="iconItem" onclick="pop('./img/qq.jpg')" href="javascript:void(0)">
 						<svg t="1712319361023" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1861" ><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="1862"></path></svg>
 						<div class="iconTip">QQ</div>
 					</a>
-					<a class="switch" href="javascript:void(0)">
-						<div class="onoffswitch">
-							<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
-								checked>
-							<label class="onoffswitch-label" for="myonoffswitch">
-								<span class="onoffswitch-inner"></span>
-								<span class="onoffswitch-switch"></span>
-							</label>
-						</div>
+					<a class="iconItem theme-toggle" id="themeToggleBtn" href="javascript:void(0)">
+						<svg class="theme-icon light-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z"/>
+							<path d="M12 3.5V1M12 23V20.5M3.5 12H1M23 12H20.5M5.3 5.3L3.5 3.5M20.5 20.5L18.7 18.7M18.7 5.3L20.5 3.5M3.5 20.5L5.3 18.7"/>
+						</svg>
+						<svg class="theme-icon dark-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" fill="none"/>
+						</svg>
+						<svg class="theme-icon system-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path d="M20 4H4C2.89543 4 2 4.83147 2 5.85714V15.1429C2 16.1685 2.89543 17 4 17H20C21.1046 17 22 16.1685 22 15.1429V5.85714C22 4.83147 21.1046 4 20 4Z"/>
+							<path d="M8 20H16M12 18V20"/>
+						</svg>
+						<div class="iconTip theme-text">主题</div>
 					</a>
 				</div>
 
 				<div class="tanChiShe">
-					<img id="tanChiShe" src="./static/svg/snake-Light.svg" alt="">
+					<img id="tanChiShe" src="./src/assets/svg/snake-Light.svg" alt="">
 				</div>
 			</header>
-
-
-
-
-
 
 			<content>
 				<!-- 网站列表 -->
@@ -181,7 +175,7 @@
 							<p>你的AI助手</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/aichat-96.png" alt="">
+							<img src="./src/assets/img/aichat-96.png" alt="">
 						</div>
 
 					</a>
@@ -191,7 +185,7 @@
 							<p>使用AI进行文生图创作</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/aimage-96.png" alt="">
+							<img src="./src/assets/img/aimage-96.png" alt="">
 						</div>
 
 					</a>
@@ -201,7 +195,7 @@
 							<p>用于集成AI大模型的API <br>(尚未对外开放注册)</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/api-96.png" alt="">
+							<img src="./src/assets/img/api-96.png" alt="">
 						</div>
 
 					</a>
@@ -211,7 +205,7 @@
 							<p>编辑与创建你的思维导图</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/mindmap-96.png" alt="">
+							<img src="./src/assets/img/mindmap-96.png" alt="">
 						</div>
 
 					</a>
@@ -221,7 +215,7 @@
 							<p>一次摆烂的小组作业</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/math-96.png" alt="">
+							<img src="./src/assets/img/math-96.png" alt="">
 						</div>
 
 					</a>
@@ -231,7 +225,7 @@
 							<p>我收藏的网站们</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/bookmark-96.png" alt="">
+							<img src="./src/assets/img/bookmark-96.png" alt="">
 						</div>
 
 					</a>
@@ -241,7 +235,7 @@
 							<p>借助此网站绘制函数图像以学习</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/function-graph-96.png" alt="">
+							<img src="./src/assets/img/function-graph-96.png" alt="">
 						</div>
 
 					</a>
@@ -251,7 +245,7 @@
 							<p>记录我的日常 <br>(还没有做这个网站)</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/blog-96.png" alt="">
+							<img src="./src/assets/img/blog-96.png" alt="">
 						</div>
 
 					</a>
@@ -273,7 +267,7 @@
 							<p>一个AI聊天与知识库问答web UI</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/aichat-96.png" alt="">
+							<img src="./src/assets/img/aichat-96.png" alt="">
 						</div>
 
 					</a>
@@ -283,7 +277,7 @@
 							<p>一个还算强大的Web思维导图</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/mindmap-96.png" alt="">
+							<img src="./src/assets/img/mindmap-96.png" alt="">
 						</div>
 
 					</a>
@@ -293,7 +287,7 @@
 							<p>个人主页与导航</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/homepage-96.png" alt="">
+							<img src="./src/assets/img/homepage-96.png" alt="">
 						</div>
 
 					</a>
@@ -303,7 +297,7 @@
 							<p>使用API调用AI绘画</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/aimage-96.png" alt="">
+							<img src="./src/assets/img/aimage-96.png" alt="">
 						</div>
 
 					</a>
@@ -313,7 +307,7 @@
 							<p>一个分享收藏站点的页面</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/bookmark-96.png" alt="">
+							<img src="./src/assets/img/bookmark-96.png" alt="">
 						</div>
 
 					</a>
@@ -323,7 +317,7 @@
 							<p>收集有趣html作品</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/i4.png" alt="">
+							<img src="./img/i4.png" alt="">
 						</div>
 
 					</a>
@@ -333,7 +327,7 @@
 							<p>收集有趣html作品</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/i4.png" alt="">
+							<img src="./img/i4.png" alt="">
 						</div>
 
 					</a> -->
@@ -349,8 +343,8 @@
 					</a>
 				</div>
 				<div class="skill">
-					<img id="skillPc" src="./static/svg/skillPc.svg" alt="" srcset="">
-					<img id="skillWap" src="./static/svg/skillWap.svg" alt="" srcset="">
+					<img id="skillPc" src="./src/assets/svg/skillPc.svg" alt="" srcset="">
+					<img id="skillWap" src="./src/assets/svg/skillWap.svg" alt="" srcset="">
 				</div>
 			</content>
 		</div>
@@ -362,15 +356,13 @@
 		<div onclick="" class="tc-main">
 			<img class="tc-img" src="" alt="" srcset="">
 		</div>
-
 	</div>
+	
+	<!-- 引入Vite入口文件 -->
+	<script type="module" src="/src/main.ts"></script>
+	
+	<!-- 统计代码 -->
+	<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+	<script>LA.init({ id: "KFqltKSkJgQTGD9l", ck: "KFqltKSkJgQTGD9l" })</script>
 </body>
-<script src="./static/js/script.js"> </script>
-
-
-
-
-<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({ id: "KFqltKSkJgQTGD9l", ck: "KFqltKSkJgQTGD9l" })</script>
-
 </html>
