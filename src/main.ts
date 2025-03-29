@@ -176,7 +176,6 @@ const toggleClass = (selector: string, className: string): void => {
 window.pop = (imageURL?: string): void => {
   const tcMainElement = document.querySelector(".tc-img") as HTMLImageElement;
   if (imageURL) {
-    // 修复路径处理逻辑，确保在任何环境都能正确加载
     tcMainElement.src = imageURL;
   }
   toggleClass(".tc-main", "active");
