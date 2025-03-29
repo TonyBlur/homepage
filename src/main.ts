@@ -15,9 +15,8 @@ interface WindowWithVendorAnimation extends Window {
 // 导入样式
 import './styles/style.css';
 
-// 导入SVG资源确保它们被Vite处理
-import snakeLightSVG from './assets/svg/snake-Light.svg';
-import snakeDarkSVG from './assets/svg/snake-Dark.svg';
+// 导入图片资源管理模块
+import { images } from './scripts/imageResources';
 
 // 主题模式类型定义
 type ThemeMode = 'light' | 'dark' | 'system';
@@ -130,7 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // 应用主题状态（Light或Dark）
   function applyThemeState(theme: string): void {
     // 使用导入的SVG资源
-    tanChiShe.src = theme === "Dark" ? snakeDarkSVG : snakeLightSVG;
+    tanChiShe.src = theme === "Dark" ? images.svg["snake-Dark"] : images.svg["snake-Light"];
     
     if (html) {
       html.dataset.theme = theme;
@@ -173,10 +172,10 @@ const toggleClass = (selector: string, className: string): void => {
 };
 
 // 弹出图片
-window.pop = (imageURL?: string): void => {
+window.pop = (imageKey?: string): void => {
   const tcMainElement = document.querySelector(".tc-img") as HTMLImageElement;
-  if (imageURL) {
-    tcMainElement.src = imageURL;
+  if (imageKey) {
+    tcMainElement.src = images.jpg[imageKey];
   }
   toggleClass(".tc-main", "active");
   toggleClass(".tc", "active");
@@ -236,9 +235,9 @@ window.addEventListener('load', (): void => {
   }, 100);
 });
 
-// 为pop函数增加全局类型声明
+// 为pop函数定义全局类型声明
 declare global {
   interface Window {
-    pop: (imageURL?: string) => void;
+    pop: (imageKey?: string) => void;
   }
 }
