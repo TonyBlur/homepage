@@ -15,6 +15,10 @@ interface WindowWithVendorAnimation extends Window {
 // 导入样式
 import './styles/style.css';
 
+// 导入SVG资源确保它们被Vite处理
+import snakeLightSVG from './assets/svg/snake-Light.svg';
+import snakeDarkSVG from './assets/svg/snake-Dark.svg';
+
 // 主题模式类型定义
 type ThemeMode = 'light' | 'dark' | 'system';
 
@@ -24,16 +28,6 @@ window.addEventListener('DOMContentLoaded', () => {
   console.log('%cCopyright © 2025 tblu.xyz',
     'background-color: #ff00ff; color: white; font-size: 24px; font-weight: bold; padding: 10px;'
   );
-  console.log('%c   /\\_/\\', 'color: #8B4513; font-size: 20px;');
-  console.log('%c  ( o.o )', 'color: #8B4513; font-size: 20px;');
-  console.log(' %c  > ^ <', 'color: #8B4513; font-size: 20px;');
-  console.log('  %c /  ~ \\', 'color: #8B4513; font-size: 20px;');
-  console.log('  %c/______\\', 'color: #8B4513; font-size: 20px;');
-
-  // 防止右键菜单
-  document.addEventListener('contextmenu', (event: Event): void => {
-    event.preventDefault();
-  });
 
   // 添加项目元素点击动画
   const buttons = document.querySelectorAll('.projectItem');
@@ -135,7 +129,8 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // 应用主题状态（Light或Dark）
   function applyThemeState(theme: string): void {
-    tanChiShe.src = `./src/assets/svg/snake-${theme}.svg`;
+    // 使用导入的SVG资源
+    tanChiShe.src = theme === "Dark" ? snakeDarkSVG : snakeLightSVG;
     
     if (html) {
       html.dataset.theme = theme;
@@ -181,7 +176,8 @@ const toggleClass = (selector: string, className: string): void => {
 window.pop = (imageURL?: string): void => {
   const tcMainElement = document.querySelector(".tc-img") as HTMLImageElement;
   if (imageURL) {
-    tcMainElement.src = imageURL.replace('./img/', './src/assets/img/');
+    // 修复路径处理逻辑，确保在任何环境都能正确加载
+    tcMainElement.src = imageURL;
   }
   toggleClass(".tc-main", "active");
   toggleClass(".tc", "active");
