@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
     /* 基本选项 */
-    "target": "es2016",
-    "lib": ["ESNext", "dom", "dom.iterable", "scripthost"],
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     
     /* 模块选项 */
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
     
     /* 互操作性选项 */
     "esModuleInterop": true,
@@ -14,6 +19,21 @@
     
     /* 类型检查选项 */
     "strict": true,
-    "skipLibCheck": true
-  }
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    
+    /* 确保可以正确识别路径 */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* 允许使用装饰器 */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

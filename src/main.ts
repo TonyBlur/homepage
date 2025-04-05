@@ -4,240 +4,296 @@
  * Copyright © 2025 tblu.xyz
  */
 
-// 定义兼容老浏览器的window扩展接口
-interface WindowWithVendorAnimation extends Window {
-  webkitRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
-  mozRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
-  oRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
-  msRequestAnimationFrame?: (callback: FrameRequestCallback) => number;
-}
-
 // 导入样式
 import './styles/style.css';
 
 // 导入图片资源管理模块
-import { images } from './scripts/imageResources';
+import { images, initImageOptimization } from './scripts/imageResources';
 
-// 主题模式类型定义
-type ThemeMode = 'light' | 'dark' | 'system';
+// 导入内容渲染器
+import { renderSites } from './scripts/contentRenderer';
 
-// 页面加载完成后的初始化函数
-window.addEventListener('DOMContentLoaded', () => {
-  // 控制台输出版权信息
-  console.log('%cCopyright © 2025 tblu.xyz',
-    'background-color: #ff00ff; color: white; font-size: 24px; font-weight: bold; padding: 10px;'
-  );
+// 从TypeScript类型导入所需的类型
+import { ThemeMode, ThemeState } from './scripts/themeManager';
 
-  // 添加项目元素点击动画
-  const buttons = document.querySelectorAll('.projectItem');
-  buttons.forEach((button: Element): void => {
-    button.addEventListener('mousedown', function(this: HTMLElement, event: Event): void {
-      this.classList.add('pressed');
-    });
-    button.addEventListener('mouseup', function(this: HTMLElement, event: Event): void {
-      this.classList.remove('pressed');
-    });
-    button.addEventListener('mouseleave', function(this: HTMLElement, event: Event): void {
-      this.classList.remove('pressed');
-    });
-    button.addEventListener('touchstart', function(this: HTMLElement, event: Event): void {
-      this.classList.add('pressed');
-    });
-    button.addEventListener('touchend', function(this: HTMLElement, event: Event): void {
-      this.classList.remove('pressed');
-    });
-    button.addEventListener('touchcancel', function(this: HTMLElement, event: Event): void {
-      this.classList.remove('pressed');
-    });
-  });
-
-  // 设置弹窗点击事件
-  const tc = document.getElementsByClassName('tc')[0] as HTMLElement;
-  const tc_main = document.getElementsByClassName('tc-main')[0] as HTMLElement;
+/**
+ * 主应用程序类 - 实现网站的主要功能
+ */
+class HomePage {
+  // 主题相关属性
+  private currentThemeMode: ThemeMode = 'system';
+  private currentThemeState: ThemeState = 'Light';
   
-  tc.addEventListener('click', function(): void {
-    toggleClass('.tc-main', 'active');
-    toggleClass('.tc', 'active');
-  });
+  // DOM元素
+  private html: HTMLElement | null = null;
+  private tanChiShe: HTMLImageElement | null = null;
+  private pageLoading: HTMLElement | null = null;
   
-  tc_main.addEventListener('click', function(event: Event): void {
-    event.stopPropagation();
-  });
-
-  // 主题设置
-  const html = document.querySelector('html');
-  const tanChiShe = document.getElementById("tanChiShe") as HTMLImageElement;
-  const themeToggleBtn = document.getElementById('themeToggleBtn') as HTMLElement;
-  
-  // 获取系统/浏览器颜色模式偏好
-  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-  
-  // 获取存储的主题模式或使用默认值
-  let themeMode = getCookie("themeMode") as ThemeMode || 'system';
-  let themeState = getEffectiveTheme(themeMode);
-
-  // 设置初始主题状态
-  applyThemeMode(themeMode);
-  
-  // 点击主题切换按钮
-  themeToggleBtn.addEventListener('click', (): void => {
-    // 按系统 -> 浅色 -> 深色 -> 系统的顺序循环切换
-    if (themeMode === 'system') {
-      themeMode = 'light';
-    } else if (themeMode === 'light') {
-      themeMode = 'dark';
-    } else {
-      themeMode = 'system';
-    }
+  /**
+   * 构造函数 - 初始化应用
+   */
+  constructor() {
+    // 初始化图片优化
+    initImageOptimization();
     
-    applyThemeMode(themeMode);
-    setCookie("themeMode", themeMode, 365);
-  });
-
-  // 监听系统主题变化
-  prefersDarkScheme.addEventListener('change', () => {
-    // 只有在系统模式下才应用系统主题变化
-    if (themeMode === 'system') {
-      themeState = prefersDarkScheme.matches ? "Dark" : "Light";
-      applyThemeState(themeState);
-    }
-  });
+    // 注册事件监听器
+    document.addEventListener('DOMContentLoaded', this.handleDOMContentLoaded.bind(this));
+    window.addEventListener('load', this.handleWindowLoad.bind(this));
+    
+    // 绑定全局弹出图片方法
+    window.pop = this.popImage.bind(this);
+  }
   
-  // 创建FPS计数器
-  createFpsCounter();
+  /**
+   * 处理DOM内容加载完成事件
+   */
+  private handleDOMContentLoaded(): void {
+    // 输出版权信息
+    console.log('%cCopyright © 2025 tblu.xyz',
+      'background-color: #ff00ff; color: white; font-size: 24px; font-weight: bold; padding: 10px;'
+    );
 
-  // 根据主题模式应用相应的主题状态和UI
-  function applyThemeMode(mode: ThemeMode): void {
+    // 渲染首屏站点列表
+    renderSites();
+    
+    // 设置延迟加载非首屏内容
+    this.setupLazyLoading();
+    
+    // 设置弹窗事件
+    this.setupPopupEvents();
+    
+    // 设置主题
+    this.setupTheme();
+  }
+  
+  /**
+   * 设置延迟加载
+   */
+  private setupLazyLoading(): void {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 当项目列表区域进入视口时，动态导入项目列表渲染逻辑
+          import('./scripts/contentRenderer.js').then(module => {
+            module.renderProjects();
+            observer.disconnect(); // 只需要加载一次
+          }).catch(err => console.error('无法加载内容渲染器:', err));
+        }
+      });
+    }, { threshold: 0.1 }); // 当10%的元素可见时触发
+
+    // 观察项目列表容器
+    const projectsContainer = document.querySelector('#ProjectsList');
+    if (projectsContainer) {
+      observer.observe(projectsContainer);
+    }
+
+    // 延迟加载非关键组件
+    setTimeout(() => {
+      // 动态导入和初始化非关键功能
+      Promise.all([
+        import('./scripts/themeManager.js'),
+        import('./scripts/uiEffects.js')
+      ]).then(([themeModule, uiModule]) => {
+        themeModule.default.init();
+        uiModule.default.init();
+      }).catch(err => console.error('无法加载UI组件:', err));
+    }, 100);
+  }
+  
+  /**
+   * 设置弹窗事件
+   */
+  private setupPopupEvents(): void {
+    const tc = document.getElementsByClassName('tc')[0] as HTMLElement;
+    const tc_main = document.getElementsByClassName('tc-main')[0] as HTMLElement;
+    
+    tc?.addEventListener('click', () => {
+      this.toggleClass('.tc-main', 'active');
+      this.toggleClass('.tc', 'active');
+    });
+    
+    tc_main?.addEventListener('click', (event: Event) => {
+      event.stopPropagation();
+    });
+  }
+  
+  /**
+   * 设置主题
+   */
+  private setupTheme(): void {
+    // 获取相关DOM元素
+    this.html = document.querySelector('html');
+    this.tanChiShe = document.getElementById("tanChiShe") as HTMLImageElement;
+    
+    // 获取存储的主题模式或使用默认值
+    this.currentThemeMode = this.getCookie("themeMode") as ThemeMode || 'system';
+    this.currentThemeState = this.getEffectiveTheme(this.currentThemeMode);
+
+    // 设置初始主题状态
+    this.applyThemeMode(this.currentThemeMode);
+    
+    // 添加主题切换功能示例
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        // 切换主题模式
+        const newMode: ThemeMode = this.currentThemeMode === 'dark' ? 'light' : 'dark';
+        this.currentThemeMode = newMode;
+        this.applyThemeMode(newMode);
+        // 保存用户选择
+        this.saveCookie("themeMode", newMode, 30);
+      });
+    }
+  }
+  
+  /**
+   * 保存Cookie - 重命名setCookie为saveCookie并使用它
+   */
+  private saveCookie(name: string, value: string, days: number): void {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+  
+  /**
+   * 获取Cookie
+   */
+  private getCookie(name: string): string | null {
+    const nameEQ = name + "=";
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i];
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1, cookie.length);
+      }
+      if (cookie.indexOf(nameEQ) === 0) {
+        return cookie.substring(nameEQ.length, cookie.length);
+      }
+    }
+    return null;
+  }
+  
+  /**
+   * 处理窗口加载完成事件
+   */
+  private handleWindowLoad(): void {
+    // 延迟加载非关键功能
+    setTimeout(() => {
+      // FPS计数器等非关键功能在页面完全加载后初始化
+      import('./scripts/performance.js').then(module => {
+        module.createFpsCounter();
+      }).catch(err => console.error('无法加载性能监控模块:', err));
+      
+      // 添加项目元素点击动画
+      this.addButtonAnimations();
+      
+      // 淡出加载界面
+      this.pageLoading = document.querySelector("#tblu-loading");
+      if (this.pageLoading) {
+        this.pageLoading.style.opacity = '0';
+      }
+    }, 100);
+  }
+  
+  /**
+   * 根据主题模式应用相应的主题状态和UI
+   */
+  private applyThemeMode(mode: ThemeMode): void {
     // 设置主题模式属性
     document.documentElement.setAttribute('data-theme-mode', mode);
     
     // 根据主题模式获取实际应用的主题状态
-    themeState = getEffectiveTheme(mode);
+    this.currentThemeState = this.getEffectiveTheme(mode);
     
     // 应用主题状态
-    applyThemeState(themeState);
+    this.applyThemeState(this.currentThemeState);
   }
   
-  // 根据主题模式获取有效的主题状态
-  function getEffectiveTheme(mode: ThemeMode): string {
+  /**
+   * 根据主题模式获取有效的主题状态
+   */
+  private getEffectiveTheme(mode: ThemeMode): ThemeState {
     if (mode === 'system') {
-      return prefersDarkScheme.matches ? "Dark" : "Light";
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? "Dark" : "Light";
     }
     return mode === 'dark' ? "Dark" : "Light";
   }
   
-  // 应用主题状态（Light或Dark）
-  function applyThemeState(theme: string): void {
+  /**
+   * 应用主题状态（Light或Dark）
+   */
+  private applyThemeState(theme: ThemeState): void {
     // 使用导入的SVG资源
-    tanChiShe.src = theme === "Dark" ? images.svg["snake-Dark"] : images.svg["snake-Light"];
+    if (this.tanChiShe) {
+      this.tanChiShe.src = theme === "Dark" ? images.svg["snake-Dark"] : images.svg["snake-Light"];
+    }
     
-    if (html) {
-      html.dataset.theme = theme;
+    if (this.html) {
+      this.html.dataset.theme = theme;
     }
   }
-});
-
-// Cookie操作
-const setCookie = (name: string, value: string, days: number): void => {
-  let expires = "";
-  if (days) {
-    const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = "; expires=" + date.toUTCString();
+  
+  /**
+   * 为所有projectItem添加点击动画
+   */
+  private addButtonAnimations(): void {
+    const buttons = document.querySelectorAll('.projectItem');
+    buttons.forEach((button: Element): void => {
+      button.addEventListener('mousedown', function(this: HTMLElement): void {
+        this.classList.add('pressed');
+      });
+      button.addEventListener('mouseup', function(this: HTMLElement): void {
+        this.classList.remove('pressed');
+      });
+      button.addEventListener('mouseleave', function(this: HTMLElement): void {
+        this.classList.remove('pressed');
+      });
+      button.addEventListener('touchstart', function(this: HTMLElement): void {
+        this.classList.add('pressed');
+      });
+      button.addEventListener('touchend', function(this: HTMLElement): void {
+        this.classList.remove('pressed');
+      });
+      button.addEventListener('touchcancel', function(this: HTMLElement): void {
+        this.classList.remove('pressed');
+      });
+    });
   }
-  document.cookie = name + "=" + value + expires + "; path=/";
-};
-
-const getCookie = (name: string): string | null => {
-  const nameEQ = name + "=";
-  const cookies = document.cookie.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    let cookie = cookies[i];
-    while (cookie.charAt(0) === ' ') {
-      cookie = cookie.substring(1, cookie.length);
-    }
-    if (cookie.indexOf(nameEQ) === 0) {
-      return cookie.substring(nameEQ.length, cookie.length);
-    }
+  
+  /**
+   * 切换类
+   */
+  private toggleClass(selector: string, className: string): void {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((element: Element): void => {
+      element.classList.toggle(className);
+    });
   }
-  return null;
-};
-
-// 切换类
-const toggleClass = (selector: string, className: string): void => {
-  const elements = document.querySelectorAll(selector);
-  elements.forEach((element: Element): void => {
-    element.classList.toggle(className);
-  });
-};
-
-// 弹出图片
-window.pop = (imageKey?: string): void => {
-  const tcMainElement = document.querySelector(".tc-img") as HTMLImageElement;
-  if (imageKey) {
-    tcMainElement.src = images.jpg[imageKey];
+  
+  /**
+   * 弹出图片
+   */
+  private popImage(imageKey?: string): void {
+    const tcMainElement = document.querySelector(".tc-img") as HTMLImageElement;
+    if (imageKey && tcMainElement) {
+      tcMainElement.src = images.jpg[imageKey];
+    }
+    this.toggleClass(".tc-main", "active");
+    this.toggleClass(".tc", "active");
   }
-  toggleClass(".tc-main", "active");
-  toggleClass(".tc", "active");
-};
+}
 
-// FPS计数器
-const createFpsCounter = (): void => {
-  const fpsElement = document.createElement('div');
-  fpsElement.id = 'fps';
-  fpsElement.style.zIndex = '10000';
-  fpsElement.style.position = 'fixed';
-  fpsElement.style.right = '5px';
-  document.body.insertBefore(fpsElement, document.body.firstChild);
-
-  // 使用带浏览器前缀兼容的requestAnimationFrame
-  const windowWithVendor = window as WindowWithVendorAnimation;
-  const requestAnimationFrame = windowWithVendor.requestAnimationFrame ||
-    windowWithVendor.webkitRequestAnimationFrame ||
-    windowWithVendor.mozRequestAnimationFrame ||
-    windowWithVendor.oRequestAnimationFrame ||
-    windowWithVendor.msRequestAnimationFrame ||
-    function (callback: FrameRequestCallback): number {
-      return window.setTimeout(callback, 1000 / 60);
-    };
-
-  let fps = 0;
-  let last = Date.now();
-  let offset: number;
-
-  const appendFps = (fpsValue: number): void => {
-    fpsElement.textContent = 'FPS: ' + fpsValue;
-  };
-
-  const step = (): void => {
-    offset = Date.now() - last;
-    fps += 1;
-
-    if (offset >= 1000) {
-      last += offset;
-      appendFps(fps);
-      fps = 0;
-    }
-
-    requestAnimationFrame(step);
-  };
-
-  step();
-};
-
-// 页面加载完成后的动画
-const pageLoading = document.querySelector("#tblu-loading");
-window.addEventListener('load', (): void => {
-  setTimeout((): void => {
-    if (pageLoading) {
-      (pageLoading as HTMLElement).style.opacity = '0';
-    }
-  }, 100);
-});
-
-// 为pop函数定义全局类型声明
+// 为弹出图片功能定义全局类型
 declare global {
   interface Window {
     pop: (imageKey?: string) => void;
   }
 }
+
+// 实例化应用
+new HomePage();
