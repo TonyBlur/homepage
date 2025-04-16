@@ -27,34 +27,40 @@ export const sitesData: ContentItem[] = [
     iconName: "aichat-96"
   },
   {
-    title: "AI 绘画",
-    description: "使用AI进行文生图创作",
-    url: "https://aimage.tblu.xyz",
-    iconName: "aimage-96"
-  },
-  {
     title: "tblu New API",
-    description: "用于集成AI大模型的API <br>(尚未对外开放注册)",
+    description: "用于集成AI大模型的API <br>(暂不对外开放)",
     url: "https://new-api.tblu.xyz/",
     iconName: "api-96"
-  },
-  {
-    title: "思绪思维导图",
-    description: "编辑与创建你的思维导图",
-    url: "https://mindmap.tblu.xyz",
-    iconName: "mindmap-96"
-  },
-  {
-    title: "中国古代数学成就",
-    description: "一次摆烂的小组作业",
-    url: "https://ancientmath.tblu.xyz",
-    iconName: "math-96"
   },
   {
     title: "tblu Bookmark",
     description: "我收藏的网站们",
     url: "https://bookmark.tblu.xyz",
     iconName: "bookmark-96"
+  },
+  {
+    title: "Searxng",
+    description: "一个简洁注重隐私的元搜索引擎",
+    url: "https://searxng.tblu.xyz",
+    iconName: "searxng-96"
+  },
+  {
+    title: "tblu Cloudreve",
+    description: "一个开源可离线下载的免费网盘",
+    url: "https://cloud.tblu.xyz",
+    iconName: "cloud-96"
+  },
+  {
+    title: "AI 绘画",
+    description: "使用AI进行文生图创作",
+    url: "https://aimage.tblu.xyz",
+    iconName: "aimage-96"
+  },
+  {
+    title: "思绪思维导图",
+    description: "编辑与创建你的思维导图",
+    url: "https://mindmap.tblu.xyz",
+    iconName: "mindmap-96"
   },
   {
     title: "函数图像绘制工具",
@@ -64,7 +70,7 @@ export const sitesData: ContentItem[] = [
   },
   {
     title: "博客",
-    description: "记录我的日常 <br>(还没有做这个网站)",
+    description: "记录我的日常 <br>(还没有这个网站...)",
     url: "https://blog.tblu.xyz",
     iconName: "blog-96"
   }
@@ -81,22 +87,10 @@ export const projectsData: ContentItem[] = [
     iconName: "aichat-96"
   },
   {
-    title: "思绪思维导图",
-    description: "一个还算强大的Web思维导图",
-    url: "https://github.com/TonyBlur/mind-map",
-    iconName: "mindmap-96"
-  },
-  {
     title: "个人主页",
     description: "个人主页与导航",
     url: "https://github.com/TonyBlur/homepage",
     iconName: "homepage-96"
-  },
-  {
-    title: "AI 绘画",
-    description: "使用API调用AI绘画",
-    url: "https://github.com/TonyBlur/AImageGen-API-with-React",
-    iconName: "aimage-96"
   },
   {
     title: "tblu Bookmark",
