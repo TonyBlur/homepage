@@ -21,7 +21,7 @@ export interface ContentItem {
  */
 export const sitesData: ContentItem[] = [
   {
-    title: "tblu LobeChat",
+    title: "tblu LobeHub",
     description: "你的AI助手",
     url: "https://chat.tblu.xyz",
     iconName: "aichat-96"
@@ -81,9 +81,9 @@ export const sitesData: ContentItem[] = [
  */
 export const projectsData: ContentItem[] = [
   {
-    title: "tblu LobeChat",
+    title: "tblu LobeHub",
     description: "一个AI聊天与知识库问答web UI",
-    url: "https://github.com/TonyBlur/tblu-lobechat",
+    url: "https://github.com/TonyBlur/tblu-lobehub",
     iconName: "aichat-96"
   },
   {
